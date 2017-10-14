@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        table {
+            margin: 0 auto;
+            width: 400px;
+            height: 250px;
+        }
+    </style>
+</head>
+<body>
+    <form id="form">
+        <table>
+            <tr>
+                <td>姓名</td>
+                <td><input type="text" name="name"></td>
+            </tr>
+            <tr>
+                <td>性别</td>
+                <td><input type="radio" name="gender" value="男">男 <input type="radio" value="女" name="gender">女</td>
+            </tr>
+            <tr>
+                <td>上传图片</td>
+                <td><input type="file"></td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><input type="button" id="btn" value="新增"></td>
+            </tr>
+        </table>
+    </form>
+</body>
+<script src="/node_modules/jquery/dist/jquery.min.js"></script>
+<script>
+    $("#btn").click(function(){
+        $.ajax({
+            type: "POST",
+            url: "/add",//提交数据到服务器的add中
+            data: $("#form").serialize(),
+            dataType: "JSON",
+            success: function(reslult){
+                if(reslult.statu == 0 ) {
+                    alert(reslult.msg);
+                    window.location = "/";
+                } else {
+                    alert(reslult.msg);
+                }
+                //一种：成功
+                //  跳转回首页
+                //二种：失败
+                //  停留在原本的页面
+            }
+        });
+    });
+    //常用的请求方式：
+    //get:从服务器中拿数据
+    //  直接在地址栏中请求
+    //  通过a连接跳转
+    //  使用js跳转：window.location = "/";
+    //  form表单的get提交
+    //  ajax的get请求
+    //post:提交数据到服务器中
+    //  form表单的post提交
+    //  ajax的post请求
+
+</script>
+</html>
