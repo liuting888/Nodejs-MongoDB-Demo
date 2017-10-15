@@ -37,8 +37,8 @@
             <td><img src="/img/{{$value.img}}"></td>
             <td>
                 <a href="#">查看</a>
-                <a href="#">修改</a>
-                <a href="#">删除</a>
+                <a href="/edit?id={{$value.id}}">修改</a>
+                <a onclick="del({{$value.id}})" href="javascript:void(0)">删除</a>
             </td>
           </tr>
         {{/each}}
@@ -46,4 +46,25 @@
     </table>
   </div>
 </body>
+<script src="/node_modules/jquery/dist/jquery.min.js"></script>
+<script>
+  function del(id) {
+    if(confirm("确定删除吗？")){
+       $.ajax({
+         type: "GET",
+         url: "/del",
+         data: "id="+id,
+         dataType: "JSON",
+         success: function(result) {
+           if(result.statu == 0) {
+             alert("删除成功");
+             window.location = "/";
+           }else {
+            alert("删除失败");
+           }
+         }
+       });
+    }
+  }
+</script>
 </html>

@@ -17,22 +17,27 @@
 </head>
 <body>
     <form id="form">
+        <input type="hidden" id="id" value="{{id}}">
         <table>
             <tr>
                 <td>姓名</td>
-                <td><input type="text" name="name" id="name"></td>
+                <td><input type="text" name="name" id="name" value="{{name}}"></td>
             </tr>
             <tr>
                 <td>性别</td>
-                <td><input type="radio" class="gender" name="gender" value="男">男 <input class="gender"  type="radio" value="女" name="gender">女</td>
+                {{if (gender== "男")}}
+                <td><input type="radio" checked class="gender" name="gender" value="男">男 <input class="gender"  type="radio" value="女" name="gender">女</td>
+                {{else}}
+                <td><input type="radio" class="gender" name="gender" value="男">男 <input class="gender"  type="radio" checked value="女" name="gender">女</td>
+                {{/if}}
             </tr>
             <tr>
                 <td>上传图片</td>
-                <td><img src="" id="preImg" alt=""><input name="img" id="img" type="file"></td>
+                <td><img src="/img/{{img}}" id="preImg" alt=""><input name="img" id="img" type="file"></td>
             </tr>
             <tr>
                 <td></td>
-                <td><input type="submit" id="btn" value="新增"></td>
+                <td><input type="submit" id="btn" value="修改"></td>
             </tr>
         </table>
     </form>
@@ -65,8 +70,7 @@
         });
     });
 
-
-    //实现异步上传
+    //实现数据的提交
     $("#btn").click(function(e){
         //阻止默认事件
         e.preventDefault();
@@ -81,6 +85,7 @@
         formData.append("name",$("#name").val());//向formData中加入Name属性
         formData.append("gender",$(".gender:checked").val());//向formdata中加入gender属性
         formData.append("img",$("#preImg").attr("src"));//向formdata中加入要上传的文件
+        formData.append("id",$("#id").val());
 
         //如果直接通过formData结合JQUERY中的ajax上传文件会报错：content-type: mulitpart/form-data
         //jquery.min.js:4 Uncaught TypeError: Illegal invocation
@@ -92,7 +97,7 @@
 
         $.ajax({
             type: "POST",
-            url: "/add",//提交数据到服务器的add中
+            url: "/edit",//提交数据到服务器的add中
             data: formData,
             contentType: false,
             processData: false,
@@ -111,17 +116,6 @@
             }
         });
     });
-    //常用的请求方式：
-    //get:从服务器中拿数据
-    //  直接在地址栏中请求
-    //  通过a连接跳转
-    //  使用js跳转：window.location = "/";
-    //  form表单的get提交
-    //  ajax的get请求
-    //post:提交数据到服务器中
-    //  form表单的post提交
-    //  ajax的post请求
-
 
 </script>
 </html>
