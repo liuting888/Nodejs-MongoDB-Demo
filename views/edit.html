@@ -17,15 +17,15 @@
 </head>
 <body>
     <form id="form">
-        <input type="hidden" id="id" value="{{id}}">
+        <input type="hidden" id="id" value="{{obj.id}}">
         <table>
             <tr>
                 <td>姓名</td>
-                <td><input type="text" name="name" id="name" value="{{name}}"></td>
+                <td><input type="text" name="name" id="name" value="{{obj.name}}"></td>
             </tr>
             <tr>
                 <td>性别</td>
-                {{if (gender== "男")}}
+                {{if (obj.gender== "男")}}
                 <td><input type="radio" checked class="gender" name="gender" value="男">男 <input class="gender"  type="radio" value="女" name="gender">女</td>
                 {{else}}
                 <td><input type="radio" class="gender" name="gender" value="男">男 <input class="gender"  type="radio" checked value="女" name="gender">女</td>
@@ -33,7 +33,7 @@
             </tr>
             <tr>
                 <td>上传图片</td>
-                <td><img src="/img/{{img}}" id="preImg" alt=""><input name="img" id="img" type="file"></td>
+                <td><img src="/img/{{obj.img}}" id="preImg" alt=""><input name="img" id="img" type="file"></td>
             </tr>
             <tr>
                 <td></td>

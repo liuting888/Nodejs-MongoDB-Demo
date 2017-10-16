@@ -11,8 +11,10 @@ router.get("/",handler.getIndex)
     .post("/upload",handler.postUpload)
     .get("/edit",handler.getEdit)
     .post("/edit",handler.postEdit)
-    .get("/del",handler.getDel);
-
+    .get("/del",handler.getDel)
+    .get("/login",handler.getLogin)
+    .post("/login",handler.postLogin)
+    
 module.exports = router;
 
 // else if (method == "GET" && url.indexOf("/node_modules")!= -1 || url.indexOf("/img") != -1) {
